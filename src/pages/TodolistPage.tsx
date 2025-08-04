@@ -24,17 +24,23 @@ function App() {
       isDone: false,
     },
   ]);
-
+ const [done,donenum]= useState(tasks.length);
+const [all,allnum] =  useState(tasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length); 
   const handleAdd = (newTask: TaskCardProps) => {
     //make a new array based on old "tasks" and add newTask as last one
-    const newTasks = [...tasks, newTask];
+    const newTasks = [...tasks, newTask]; 
+    allnum(newTasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length);
+    donenum( newTasks.length);  
     setTasks(newTasks);
+     
   };
 
   // Define the function with proper type
   const deleteTask = (taskId: string) => {
-    const newTasks = tasks.filter((task: TaskCardProps) => task.id !== taskId);
+    const newTasks = tasks.filter((task: TaskCardProps) => task.id !== taskId); allnum(newTasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length);
+    donenum(newTasks.length );  
     setTasks(newTasks);
+   
   };
 
   // Define the function with proper type
@@ -42,14 +48,19 @@ function App() {
     const newTasks = tasks.map((todo: TaskCardProps) =>
       todo.id === taskId ? { ...todo, isDone: !todo.isDone } : todo
     );
-    setTasks(newTasks);
+    
+     setTasks(newTasks); 
+   allnum( newTasks .filter((todo: TaskCardProps) =>todo.isDone==true ).length);  
+  
   };
 
+   
+   
   return (
     <div className="col-12 m-2 p-0">
       <div className="container text-center">
         <h2>Todo List</h2>
-        <span className="m-2">All : () Done : ()</span>
+        <span className="m-2">All : ({all}) Done : ({done})</span>
         {/* Modal Component */}
         <button
           type="button"
@@ -71,6 +82,7 @@ function App() {
               toggleDoneTaskFunc={toggleDoneTask}
               isDone={task.isDone}
               key={task.id}
+               
             />
           ))}
         </>
