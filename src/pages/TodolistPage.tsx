@@ -24,21 +24,22 @@ function App() {
       isDone: false,
     },
   ]);
- const [done,donenum]= useState(tasks.length);
-const [all,allnum] =  useState(tasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length); 
+ const [done,donenum]= useState(tasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length);
+const [all,allnum] =  useState(tasks.length); 
   const handleAdd = (newTask: TaskCardProps) => {
     //make a new array based on old "tasks" and add newTask as last one
     const newTasks = [...tasks, newTask]; 
-    allnum(newTasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length);
-    donenum( newTasks.length);  
+    allnum(newTasks.length);
+    donenum(newTasks .filter((todo: TaskCardProps) =>todo.isDone==true ).length);  
     setTasks(newTasks);
      
   };
 
   // Define the function with proper type
   const deleteTask = (taskId: string) => {
-    const newTasks = tasks.filter((task: TaskCardProps) => task.id !== taskId); allnum(newTasks .filter(   (todo: TaskCardProps) =>todo.isDone==true ).length);
-    donenum(newTasks.length );  
+    const newTasks = tasks.filter((task: TaskCardProps) => task.id !== taskId); 
+    allnum(newTasks.length);
+    donenum(newTasks .filter((todo: TaskCardProps) =>todo.isDone==true ).length);  
     setTasks(newTasks);
    
   };
@@ -50,7 +51,7 @@ const [all,allnum] =  useState(tasks .filter(   (todo: TaskCardProps) =>todo.isD
     );
     
      setTasks(newTasks); 
-   allnum( newTasks .filter((todo: TaskCardProps) =>todo.isDone==true ).length);  
+   donenum( newTasks .filter((todo: TaskCardProps) =>todo.isDone==true ).length);  
   
   };
 
